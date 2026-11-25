@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bekithemba Nkomo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script>
+try{var t=localStorage.getItem('bn-theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){}
+</script>
+<style>
+/* VOICE everyday-professional: a data person's own site, confident and exact
+   IDEA a property graph of his work, the thing he builds every day in Neo4j
+   PICTURE a large live graph: projects as big nodes, tools and methods wired to them
+   COLOUR ice ground, ink, one hot pink for projects; night is ink ground
+   TYPE Space Grotesk 500/700 + Inter
+   LAYOUT laptop: name and intro across the top, graph full width beneath; phone: name, graph, links
+   ASK retrieval over this same profile; the reply uses only the passages it pulled */
+:root{color-scheme:light dark;--bg:light-dark(#dff1f7,#06222e);--ink:light-dark(#06222e,#e4f3f8);--soft:light-dark(#4a6872,#9fbfc9);--line:light-dark(#9cc3cf,#21495a);--card:light-dark(#ffffff,#0b2f3d);--pink:#ff2e7e;--pinkink:light-dark(#c4004f,#ff6aa3)}
+:root[data-theme=light]{color-scheme:light}
+:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 Inter,system-ui,sans-serif;overflow-x:clip;transition:background .2s,color .2s}
+a{color:inherit}
+h1,h2,h3{font-family:"Space Grotesk",system-ui,sans-serif;letter-spacing:-.02em;line-height:1.05;margin:0;text-wrap:balance}
+.band{padding-block:clamp(28px,4vw,64px);padding-left:max(5vw,16px,env(safe-area-inset-left,0px));padding-right:max(5vw,16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1240px;margin:0 auto}
+nav{display:flex;flex-wrap:wrap;gap:8px 20px;align-items:center;justify-content:space-between;padding:16px max(5vw,16px);max-width:1240px;margin:0 auto}
+nav b{font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:18px}
+.nav-r{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center}
+nav .links{display:flex;flex-wrap:wrap;gap:4px 18px;align-items:center}
+.theme{width:44px;height:44px;border-radius:999px;border:2px solid var(--ink);background:transparent;color:var(--ink);display:grid;place-items:center;padding:0;cursor:pointer}
+.theme:hover,.theme:focus-visible{border-color:var(--pink);outline:none}
+.theme svg{width:18px;height:18px;display:block}
+.skip{position:absolute;left:12px;top:-48px;background:var(--ink);color:var(--bg);padding:10px 14px;border-radius:8px;z-index:2;font-weight:600;text-decoration:none}
+.skip:focus{top:12px}
+nav a{text-decoration:none;font-weight:500;padding:10px 0;border-bottom:2px solid transparent}
+nav a:hover,nav a:focus-visible{border-color:var(--pink);outline:none}
+.hero{padding-top:8px;padding-bottom:0}
+.top{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:24px 48px;align-items:end}
+h1{font-size:clamp(40px,6.4vw,76px);font-weight:700}
+.role{font-family:"Space Grotesk",sans-serif;font-size:clamp(20px,2.2vw,26px);font-weight:500;margin:14px 0 0}
+.intro{font-size:17px;max-width:62ch;margin:0;color:var(--ink)}
+.acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.btn{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border-radius:999px;font-weight:600;text-decoration:none;border:2px solid var(--ink)}
+.btn.p{background:var(--ink);color:var(--bg)}
+.btn:hover,.btn:focus-visible{border-color:var(--pink);outline:none}
+.fig{position:relative;min-height:440px;margin-top:20px}
+.fig>svg{position:absolute;inset:0;width:100%;height:100%}
+.fig .note{position:absolute;left:0;bottom:10px;font-size:13px;color:var(--soft);margin:0}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:4px;font-family:Inter,sans-serif}
+.edge{stroke:var(--line);stroke-width:1.4;transition:stroke .2s,opacity .2s}
+.node{cursor:pointer}
+.node circle{transition:r .2s}
+.dim .edge{opacity:.15}.dim .node{opacity:.25}
+.dim .edge.on{opacity:1;stroke:var(--pink)}.dim .node.on{opacity:1}
+.strip{background:var(--ink);color:var(--bg)}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(14em,1fr));gap:20px 40px}
+.facts div{border-top:1px solid color-mix(in srgb,var(--bg) 35%,transparent);padding-top:12px}
+.facts b{display:block;font-family:"Space Grotesk",sans-serif;font-size:20px;font-weight:500}
+.facts span{font-size:15px;opacity:.85}
+h2{font-size:clamp(32px,4vw,46px);margin-bottom:24px}
+.projects{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.proj{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px;display:grid;grid-template-rows:auto auto 1fr auto;gap:10px;scroll-margin-top:20px}
+.proj:target,.proj.hl{border-color:var(--pink);box-shadow:0 0 0 2px var(--pink)}
+.proj h3{font-size:24px;font-weight:700}
+.proj .kind{color:var(--pinkink);font-weight:600;font-size:14px;margin:0}
+.proj p{margin:0}
+.tags{display:flex;flex-wrap:wrap;gap:6px;list-style:none;padding:0;margin:6px 0 0}
+.tags li{font-size:13px;padding:4px 10px;border-radius:999px;border:1px solid var(--line)}
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px}
+.tl{list-style:none;margin:0;padding:0}
+.tl li{display:grid;grid-template-columns:max-content minmax(0,1fr);gap:4px 18px;padding:16px 0;border-top:1px solid var(--line)}
+.tl .y{font-family:"Space Grotesk",sans-serif;font-weight:500;white-space:nowrap;color:var(--pinkink);min-width:3.5em}
+.tl b{display:block}
+.tl span{color:var(--soft);font-size:15px}
+.skills{display:grid;gap:18px}
+.skills h3{font-size:18px;font-weight:500;margin-bottom:8px}
+#certifications{padding-top:0}
+.certs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.cert{display:grid;grid-template-columns:56px minmax(0,1fr);gap:18px;align-items:start;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px;text-decoration:none}
+.cert:hover,.cert:focus-visible{border-color:var(--pink);outline:none;box-shadow:0 0 0 2px var(--pink)}
+.seal svg{width:56px;height:56px;display:block}
+.cert b{display:block;font-family:"Space Grotesk",sans-serif;font-size:20px;font-weight:700;line-height:1.2}
+.cert .by{display:block;margin-top:6px}
+.cert .dt{display:block;margin-top:4px;font-size:14px;color:var(--pinkink);font-weight:600}
+@media(max-width:720px){.certs{grid-template-columns:minmax(0,1fr)}}
+.contact{background:var(--pink);color:#1a0010}
+.contact h2{max-width:16ch}
+.cl{display:grid;grid-template-columns:repeat(auto-fit,minmax(15em,1fr));gap:14px;margin-top:8px}
+.cl a{display:block;background:#fff;color:#06222e;text-decoration:none;border-radius:12px;padding:16px 18px;min-height:44px;border:2px solid transparent}
+.cl a:hover,.cl a:focus-visible{border-color:#06222e;outline:none}
+.cl small{display:block;font-size:13px;opacity:.75}
+.cl strong{overflow-wrap:anywhere;font-weight:600}
+footer{padding:20px max(5vw,16px);font-size:14px;color:var(--soft);max-width:1240px;margin:0 auto}
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+#ask{scroll-margin-top:12px}
+.ask{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:28px 48px;align-items:start}
+.lede{margin:0;max-width:46ch;color:var(--soft)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.chip{font:inherit;font-weight:600;font-size:14px;color:inherit;background:transparent;border:1px solid var(--line);border-radius:999px;min-height:44px;padding:0 14px;cursor:pointer}
+.chip:hover,.chip:focus-visible{border-color:var(--pink);outline:none}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;display:flex;flex-direction:column;min-height:440px}
+.panel-h{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:4px 8px 4px 16px;border-bottom:1px solid var(--line);font-family:"Space Grotesk",sans-serif;font-weight:500}
+.panel-h button{font:inherit;font-family:Inter,sans-serif;font-size:14px;font-weight:600;background:none;border:0;color:var(--pinkink);min-height:44px;padding:0 8px;cursor:pointer}
+.panel-h button:hover,.panel-h button:focus-visible{color:var(--ink);outline:none}
+.log{flex:1;overflow:auto;max-height:520px;padding:16px;display:flex;flex-direction:column;gap:12px}
+.empty{color:var(--soft);margin:0}
+.msg{max-width:92%;border-radius:14px;padding:12px 14px;overflow-wrap:anywhere}
+.msg p{margin:0}
+.msg p+p{margin-top:8px}
+.msg.user{margin-left:auto;background:var(--ink);color:var(--bg)}
+.msg.bot{background:color-mix(in srgb,var(--pink) 10%,var(--card));border:1px solid var(--line)}
+.msg.pending{color:var(--soft);background:transparent;border:0;padding-left:0}
+.srcs{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;margin-top:10px}
+.srcs span{font-size:12px;font-weight:600;color:var(--soft)}
+.srcs a{font-size:12px;font-weight:600;color:var(--pinkink);text-decoration:none;border-bottom:1px solid transparent}
+.srcs a:hover,.srcs a:focus-visible{border-bottom-color:var(--pink);outline:none}
+.composer{display:flex;gap:8px;padding:12px;border-top:1px solid var(--line)}
+.composer input{flex:1;min-width:0;font:inherit;font-size:16px;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:12px 16px;min-height:44px}
+.composer input:focus-visible{outline:2px solid var(--pink);border-color:transparent}
+.composer button{font:inherit;font-weight:600;background:var(--ink);color:var(--bg);border:2px solid var(--ink);border-radius:999px;min-height:44px;padding:0 16px;cursor:pointer}
+.composer button:hover,.composer button:focus-visible,.composer button:disabled{border-color:var(--pink);outline:none}
+.composer button:disabled,.composer input:disabled{opacity:.6;cursor:default}
+@media(max-width:900px){.top,.ask{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:720px){.projects,.two{grid-template-columns:minmax(0,1fr)}.two{gap:24px}}
+@media(max-width:600px){.fig{min-height:380px}nav{padding-bottom:4px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style>
+</head>
+<body>
+<a class="skip" href="#work">Skip to work</a>
+<nav aria-label="Main">
+  <b>Bekithemba Nkomo</b>
+  <div class="nav-r">
+    <div class="links"><a href="#work">Work</a><a href="#about">About</a><a href="#background">Background</a><a href="#certifications">Certifications</a><a href="#ask">Ask</a><a href="#contact">Contact</a></div>
+    <button class="theme" id="theme" type="button" aria-label="Switch color theme"></button>
+  </div>
+</nav>
+
+<header class="band hero">
+  <div class="wrap">
+    <div class="top">
+      <div>
+        <h1>Bekithemba Nkomo</h1>
+        <p class="role">Data analyst building graph-powered data products</p>
+      </div>
+      <div>
+        <p class="intro">I turn connected data into decisions: supply-chain risk networks, research chatbots grounded in knowledge graphs, and recommenders that learn from relationships. Based in Harare, Zimbabwe.</p>
+        <div class="acts"><a class="btn p" href="#work">See my work</a><a class="btn" href="#ask">Ask about me</a><a class="btn" href="#contact">Get in touch</a></div>
+      </div>
+    </div>
+    <div class="fig" id="fig" aria-label="Graph of my projects and the tools behind them">
+      <svg id="g" role="img" aria-label="Network diagram linking four projects to the tools and methods used in each"></svg>
+      <p class="note">My work as a graph. Pink nodes are projects; tap one to jump to it.</p>
+    </div>
+  </div>
+</header>
+
+<section class="band strip" aria-label="At a glance">
+  <div class="wrap facts">
+    <div><b>M.S. Data Analytics &amp; Visualization</b><span>Katz School, Yeshiva University</span></div>
+    <div><b>B.Sc. Hons Computer Science</b><span>NUST Zimbabwe, 2020</span></div>
+    <div><b>Neo4j GDS certified</b><span>Graph data science, Cypher, NeoDash</span></div>
+    <div><b>English, Shona, Ndebele</b><span>Languages</span></div>
+  </div>
+</section>
+
+<section class="band" id="work">
+  <div class="wrap">
+    <h2>Selected work</h2>
+    <div class="projects" id="plist"></div>
+  </div>
+</section>
+
+<section class="band" id="about">
+  <div class="wrap two">
+    <div>
+      <h2>About</h2>
+      <p>I started in IT in Harare, first at the City of Harare and then at FHI 360, where I ran the IT for offices across two provinces and kept more than 80 people connected, secure and backed up. That work taught me that data only matters when someone can act on it.</p>
+      <p>Graduate study in data analytics and visualization took me deep into graph data science: modelling networks in Neo4j, running algorithms like PageRank, Betweenness Centrality and Louvain, and presenting the results in dashboards people actually use.</p>
+      <p>I also hold a postgraduate diploma in sustainable project management, monitoring and evaluation, so I think about data products the way a product owner does: who uses it, what changes because of it, and how we measure that.</p>
+      <p>I'm looking for roles in data analytics, data product design and development, and product ownership.</p>
+    </div>
+    <div>
+      <h2>Toolkit</h2>
+      <div class="skills" id="skills"></div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="background">
+  <div class="wrap two">
+    <div>
+      <h2>Education</h2>
+      <ul class="tl">
+        <li><span class="y">2025–26</span><div><b>M.S., Data Analytics and Visualization</b><span>Katz School of Science and Health, Yeshiva University, New York</span></div></li>
+        <li><span class="y">PGDip</span><div><b>Sustainable Project Management, Monitoring and Evaluation</b><span>Midlands State University, Zimbabwe</span></div></li>
+        <li><span class="y">2020</span><div><b>B.Sc. Honours, Computer Science</b><span>National University of Science and Technology (NUST), Zimbabwe</span></div></li>
+      </ul>
+    </div>
+    <div>
+      <h2>Experience</h2>
+      <ul class="tl">
+        <li><span class="y">2026</span><div><b>AI annotation and evaluation fellow</b><span>Code evaluation, fail-to-pass test writing and model-response review across fellowship projects</span></div></li>
+        <li><span class="y">2023</span><div><b>Administrative and Finance Clerk, FHI 360</b><span>Zimbabwe · Aug to Dec 2023 · Procurement and finance administration</span></div></li>
+        <li><span class="y">2022–23</span><div><b>Information Technology Assistant, FHI 360</b><span>Harare · Jul 2022 to Jul 2023 · Ran IT for offices across two provinces: Active Directory and Exchange for 80+ users, LAN/WAN and WLAN, security controls, and backup and recovery</span></div></li>
+        <li><span class="y">2021–22</span><div><b>Information Technology Intern, FHI 360</b><span>Harare · May 2021 to Jun 2022 · Azure and SharePoint administration</span></div></li>
+        <li><span class="y">2018–19</span><div><b>ICT Intern, City of Harare</b><span>Harare · Nov 2018 to Aug 2019</span></div></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="certifications">
+  <div class="wrap">
+    <h2>Certifications</h2>
+    <div class="certs">
+      <a class="cert" href="https://graphacademy.neo4j.com/c/54b9bba0-9e0f-4381-9b2e-a059d4bb4fd9">
+        <span class="seal" aria-hidden="true"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" fill="var(--pink)"/><g stroke="#fff" stroke-width="2.4"><line x1="15" y1="30" x2="24" y2="15"/><line x1="24" y1="15" x2="33" y2="29"/><line x1="15" y1="30" x2="33" y2="29"/></g><g fill="#fff"><circle cx="15" cy="30" r="4.5"/><circle cx="24" cy="15" r="4.5"/><circle cx="33" cy="29" r="4.5"/></g></svg></span>
+        <span><b>Neo4j Graph Data Science Certification</b><span class="by">Neo4j GraphAcademy</span><span class="dt">Issued March 2026 · Verify credential</span></span>
+      </a>
+      <a class="cert" href="https://www.udemy.com/certificate/UC-7634e1ef-82ce-44f0-a4ef-c6317c18886e/">
+        <span class="seal" aria-hidden="true"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" fill="var(--ink)"/><g fill="none" stroke="var(--bg)" stroke-width="2.4" stroke-linecap="round"><path d="M14 18h20M14 24h14M14 30h8"/><circle cx="32" cy="30" r="4"/></g></svg></span>
+        <span><b>AI Engineer Core Track: LLM Engineering, RAG, QLoRA, Agents</b><span class="by">Udemy · Ed Donner and Ligency · 33.5 hours</span><span class="dt">Completed April 2026 · Verify credential</span></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="ask">
+  <div class="wrap ask">
+    <div>
+      <h2>Ask about me</h2>
+      <p class="lede">Ask about the work, the study, or a role. Your question retrieves the matching parts of this page, and the reply is written only from those passages.</p>
+      <div class="chips" id="ask-chips">
+        <button class="chip" type="button">What have you built with Neo4j?</button>
+        <button class="chip" type="button">Are you open to remote roles?</button>
+        <button class="chip" type="button">Where did you study?</button>
+        <button class="chip" type="button">How do I reach you?</button>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="panel-h"><span>From this profile</span><button type="button" id="ask-clear">Clear</button></div>
+      <div class="log" id="ask-log" role="log" aria-live="polite" aria-relevant="additions"></div>
+      <form class="composer" id="ask-form">
+        <label class="sr" for="ask-q">Your question</label>
+        <input id="ask-q" name="q" type="text" maxlength="400" placeholder="Ask about a project, a skill, or a role" autocomplete="off">
+        <button type="submit">Ask</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="band contact" id="contact">
+  <div class="wrap">
+    <h2>Let's work with your data</h2>
+    <p style="max-width:60ch;margin:0 0 18px">Open to data analytics, data product and product owner roles, in Zimbabwe or remote.</p>
+    <div class="cl">
+      <a href="mailto:bnkomo984@gmail.com"><small>Email</small><strong>bnkomo984@gmail.com</strong></a>
+      <a href="https://www.linkedin.com/in/bekithemba-nkomo-da"><small>LinkedIn</small><strong>linkedin.com/in/bekithemba-nkomo-da</strong></a>
+      <a href="https://github.com/bexavi"><small>GitHub</small><strong>github.com/bexavi</strong></a>
+    </div>
+  </div>
+</section>
+<footer>© 2026 Bekithemba Nkomo · Harare, Zimbabwe</footer>
+
+<script>
+{
+const P=[
+ {id:'p1',short:'Supply chain risk',title:'Supply chain risk analytics',kind:'Graduate capstone',text:'Modelled a multi-echelon automotive supply chain as a graph in Neo4j to find where disruption would hurt most. Used PageRank and Betweenness Centrality to surface critical suppliers and Louvain community detection to reveal clusters of shared risk. Built with teammates Masheia Dzimba and Peter Mangoro, after two dataset pivots to land on the right data.',tags:['Neo4j GDS','Cypher','PageRank','Betweenness','Louvain','NeoDash']},
+ {id:'p2',short:'GraphRAG chatbot',title:'GraphRAG research chatbot',kind:'Built for the Devreotes Lab (Bhatt Lab)',text:'A chatbot that answers questions from a lab\'s research papers by grounding a language model in a knowledge graph. Papers are parsed with PyMuPDF, biomedical entities extracted with scispaCy, stored in Neo4j, and served through a streaming Nuxt.js interface.',tags:['Neo4j','OpenAI API','PyMuPDF','scispaCy','Nuxt.js','Python']},
+ {id:'p3',short:'Movie recommender',title:'Graph-based movie recommender',kind:'Recommender system',text:'Recommends films from the shape of the viewing graph. Combines Jaccard node similarity with FastRP embeddings and kNN cosine similarity, and measures quality with precision@K.',tags:['Neo4j GDS','FastRP','Jaccard','kNN','precision@K','Python']},
+ {id:'p4',short:'AI evaluation',title:'AI annotation and code evaluation',kind:'Fellowship work',text:'Evaluated AI models and their code. Worked a Docker-based workflow covering PR validation, golden-solution development, fail-to-pass test writing and metadata, and reviewed model responses for justification quality and formatting faults.',tags:['Docker','Git','Python','Test writing','Model evaluation']}
+];
+const S=[
+ {h:'Graph data science',i:['Neo4j','Cypher','Neo4j GDS','NeoDash','APOC']},
+ {h:'Analysis and machine learning',i:['Python','SQL','R','pandas','NumPy','scikit-learn']},
+ {h:'Visualization',i:['Tableau','Power BI','NeoDash','Matplotlib']},
+ {h:'Databases and cloud',i:['PostgreSQL','MySQL','MongoDB','AWS','Google Cloud']},
+ {h:'Applied AI',i:['OpenAI API','RAG and GraphRAG','LLM agents','scispaCy']},
+ {h:'Building products',i:['FastAPI','Nuxt.js','Git','Docker','Azure','SharePoint']}
+];
+document.getElementById('plist').innerHTML=P.map(p=>`<article class="proj" id="${p.id}"><p class="kind">${p.kind}</p><h3>${p.title}</h3><p>${p.text}</p><ul class="tags">${p.tags.map(t=>`<li>${t}</li>`).join('')}</ul></article>`).join('');
+document.getElementById('skills').innerHTML=S.map(s=>`<div><h3>${s.h}</h3><ul class="tags">${s.i.map(t=>`<li>${t}</li>`).join('')}</ul></div>`).join('');
+
+/* graph data: project nodes + tool nodes, edges from tags */
+const tools=[...new Set(P.flatMap(p=>p.tags))];
+const N=[...P.map(p=>({id:p.id,label:p.short,proj:1})),...tools.map(t=>({id:t,label:t,proj:0}))];
+const E=P.flatMap(p=>p.tags.map(t=>[p.id,t]));
+let seed=7;const rnd=()=>(seed=seed*16807%2147483647)/2147483647;
+const s=document.getElementById('g');let pos=null,lastW=0;
+const layout=(W,H)=>{
+  const m={};const narrow=W<520;
+  const anchors=narrow?[[.3,.2],[.7,.42],[.3,.62],[.7,.82]]:[[.16,.42],[.4,.62],[.62,.34],[.86,.6]];
+  N.forEach((n,i)=>{const a=n.proj?anchors[+n.id[1]-1]:[.1+.8*rnd(),.1+.75*rnd()];m[n.id]={x:a[0]*W,y:a[1]*H,vx:0,vy:0,n}});
+  const L=narrow?70:110;
+  for(let k=0;k<320;k++){
+    const v=Object.values(m);
+    for(let i=0;i<v.length;i++)for(let j=i+1;j<v.length;j++){const a=v[i],b=v[j];let dx=a.x-b.x,dy=a.y-b.y,d=Math.hypot(dx,dy)||1;const f=(narrow?1800:3200)/(d*d);dx/=d;dy/=d;a.vx+=dx*f;a.vy+=dy*f;b.vx-=dx*f;b.vy-=dy*f}
+    E.forEach(([a,b])=>{const A=m[a],B=m[b];const dx=B.x-A.x,dy=B.y-A.y,d=Math.hypot(dx,dy)||1;const f=(d-L)*.02;A.vx+=dx/d*f*.3;A.vy+=dy/d*f*.3;B.vx-=dx/d*f;B.vy-=dy/d*f});
+    v.forEach(p=>{if(p.n.proj){const a=anchors[+p.n.id[1]-1];p.vx+=(a[0]*W-p.x)*.05;p.vy+=(a[1]*H-p.y)*.05}
+      p.x+=p.vx*.5;p.y+=p.vy*.5;p.vx*=.6;p.vy*=.6;
+      const mx=p.n.proj?60:50;p.x=Math.max(mx,Math.min(W-mx,p.x));p.y=Math.max(28,Math.min(H-48,p.y))});
+  }
+  return m;
+};
+const draw=()=>{
+  const W=s.clientWidth,H=s.clientHeight;if(!W||!H)return;
+  if(!pos||Math.abs(W-lastW)>40){seed=7;pos=layout(W,H);lastW=W}
+  const narrow=W<520;
+  const edges=E.map(([a,b])=>`<line class="edge" data-a="${a}" data-b="${b}" x1="${pos[a].x.toFixed(1)}" y1="${pos[a].y.toFixed(1)}" x2="${pos[b].x.toFixed(1)}" y2="${pos[b].y.toFixed(1)}"/>`).join('');
+  const nodes=N.map(n=>{const p=pos[n.id];const r=n.proj?(narrow?16:22):(narrow?5:7);
+    const lab=n.proj?`<text x="${p.x}" y="${p.y+r+20}" text-anchor="middle" font-size="${narrow?14:16}" font-weight="700" fill="var(--ink)">${n.label}</text>`
+      :(narrow?'':`<text x="${p.x}" y="${p.y-12}" text-anchor="middle" font-size="13" fill="var(--soft)">${n.label}</text>`);
+    return `<g class="node" data-id="${n.id}" tabindex="${n.proj?0:-1}" ${n.proj?`role="link" aria-label="${n.label} project"`:''}><circle cx="${p.x}" cy="${p.y}" r="${r}" fill="${n.proj?'var(--pink)':'var(--ink)'}" stroke="var(--bg)" stroke-width="3"/>${lab}</g>`}).join('');
+  s.innerHTML=edges+nodes;
+};
+new ResizeObserver(draw).observe(s);
+const near=id=>{const set=new Set([id]);E.forEach(([a,b])=>{if(a===id)set.add(b);if(b===id)set.add(a)});return set};
+const hi=id=>{const set=near(id);s.classList.add('dim');s.querySelectorAll('.node').forEach(g=>g.classList.toggle('on',set.has(g.dataset.id)));s.querySelectorAll('.edge').forEach(l=>l.classList.toggle('on',l.dataset.a===id||l.dataset.b===id))};
+const clr=()=>{s.classList.remove('dim');s.querySelectorAll('.on').forEach(e=>e.classList.remove('on'))};
+const go=id=>{const el=document.getElementById(id);if(!el)return;document.querySelectorAll('.proj.hl').forEach(x=>x.classList.remove('hl'));el.classList.add('hl');el.scrollIntoView({block:'center'});setTimeout(()=>el.classList.remove('hl'),2400)};
+s.addEventListener('pointerover',e=>{const g=e.target.closest('.node');if(g)hi(g.dataset.id)});
+s.addEventListener('pointerout',e=>{if(e.target.closest('.node'))clr()});
+s.addEventListener('focusin',e=>{const g=e.target.closest('.node');if(g)hi(g.dataset.id)});
+s.addEventListener('focusout',clr);
+s.addEventListener('click',e=>{const g=e.target.closest('.node');if(!g)return;const id=g.dataset.id;if(id[0]==='p'&&id.length===2)go(id);else hi(id)});
+s.addEventListener('keydown',e=>{const g=e.target.closest('.node');if(g&&(e.key==='Enter'||e.key===' ')){e.preventDefault();go(g.dataset.id)}});
+}
+</script>
+<script>
+/* Retrieval over the profile. Leave ASK_API empty to reply with the passages themselves.
+   Or point it at a POST endpoint that accepts {question, passages:[{title,text}]}
+   and returns {answer} written only from those passages. */
+const ASK_API="";
+function createEngine(){
+const KB=[
+{id:"who",title:"About",href:"#about",keys:"who bekithemba nkomo data analyst harare zimbabwe based located location live lives living introduction bio profile",say:"I am Bekithemba Nkomo, a data analyst in Harare, Zimbabwe. I turn connected data into decisions: supply-chain risk networks, research chatbots grounded in knowledge graphs, and recommenders that learn from relationships."},
+{id:"looking",title:"Roles",href:"#contact",keys:"open roles hiring job jobs available work remote zimbabwe product owner analytics looking career opportunity employ hire",say:"I am looking for roles in data analytics, data product design and development, and product ownership. I am open to work in Zimbabwe or remote."},
+{id:"arc",title:"About",href:"#about",keys:"career story started path how get into data why it harare city fhi eighty users backup security graduate product owner monitoring evaluation",say:"I started in IT in Harare, first at the City of Harare and then at FHI 360, where I ran the IT for offices across two provinces and kept more than 80 people connected, secure, and backed up. That work taught me that data only matters when someone can act on it. Graduate study took me into graph data science: Neo4j, PageRank, Betweenness Centrality, Louvain, and dashboards people actually use. I also hold a postgraduate diploma in sustainable project management, monitoring and evaluation, so I think about data products the way a product owner does: who uses it, what changes because of it, and how we measure that."},
+{id:"langs",title:"Languages",href:"#about",keys:"language languages speak spoken english shona ndebele fluent",say:"I speak English, Shona, and Ndebele."},
+{id:"edu-ms",title:"Education",href:"#background",keys:"masters ms degree education university study studied school yeshiva katz data analytics visualization new york 2025 2026 graduate",say:"My graduate degree is an M.S. in Data Analytics and Visualization at the Katz School of Science and Health, Yeshiva University, New York (2025–26)."},
+{id:"edu-pg",title:"Education",href:"#background",keys:"postgraduate diploma pgdip sustainable project management monitoring evaluation midlands state university zimbabwe education study degree",say:"I hold a postgraduate diploma in Sustainable Project Management, Monitoring and Evaluation from Midlands State University, Zimbabwe."},
+{id:"edu-bsc",title:"Education",href:"#background",keys:"bachelor bsc honours computer science nust zimbabwe 2020 undergraduate degree education study school national university",say:"I earned a B.Sc. Honours in Computer Science from the National University of Science and Technology (NUST), Zimbabwe, in 2020."},
+{id:"exp-fellow",title:"Experience",href:"#background",keys:"fellowship 2026 ai annotation evaluation code docker pr golden solution fail-to-pass tests model review experience job",say:"In 2026 I am an AI annotation and evaluation fellow. The work covers code evaluation, fail-to-pass test writing, and model-response review across fellowship projects."},
+{id:"exp-fin",title:"Experience",href:"#background",keys:"fhi 360 finance clerk administrative procurement 2023 aug dec zimbabwe experience job",say:"From August to December 2023 I was an Administrative and Finance Clerk at FHI 360 in Zimbabwe, covering procurement and finance administration."},
+{id:"exp-it",title:"Experience",href:"#background",keys:"fhi 360 it assistant information technology 2022 2023 active directory exchange lan wan wlan security backup recovery 80 users provinces harare experience job",say:"From July 2022 to July 2023 I was an Information Technology Assistant at FHI 360 in Harare. I ran IT for offices across two provinces: Active Directory and Exchange for 80+ users, LAN/WAN and WLAN, security controls, and backup and recovery."},
+{id:"exp-intern",title:"Experience",href:"#background",keys:"fhi 360 intern azure sharepoint 2021 2022 harare experience job",say:"From May 2021 to June 2022 I was an Information Technology Intern at FHI 360 in Harare, working on Azure and SharePoint administration."},
+{id:"exp-city",title:"Experience",href:"#background",keys:"city of harare ict intern 2018 2019 experience job",say:"From November 2018 to August 2019 I was an ICT Intern at the City of Harare."},
+{id:"p-supply",title:"Supply chain risk analytics",href:"#p1",keys:"supply chain risk automotive suppliers disruption pagerank betweenness centrality louvain community algorithms algorithm neodash cypher neo4j gds capstone masheia dzimba peter mangoro project built graph",say:"My graduate capstone modelled a multi-echelon automotive supply chain as a graph in Neo4j to find where disruption would hurt most. PageRank and Betweenness Centrality surface critical suppliers, and Louvain community detection reveals clusters of shared risk. I built it with Masheia Dzimba and Peter Mangoro, after two dataset pivots."},
+{id:"p-rag",title:"GraphRAG research chatbot",href:"#p2",keys:"graphrag rag chatbot research papers knowledge graph pymupdf scispacy neo4j openai nuxt streaming biomedical devreotes bhatt lab llm project built",say:"I built a GraphRAG chatbot for the Devreotes Lab (Bhatt Lab). It answers questions from the lab research papers by grounding a language model in a knowledge graph. Papers are parsed with PyMuPDF, biomedical entities are extracted with scispaCy, stored in Neo4j, and served through a streaming Nuxt.js interface. The stack also includes the OpenAI API and Python."},
+{id:"p-movie",title:"Graph-based movie recommender",href:"#p3",keys:"movie movies film films recommender jaccard fastrp embeddings knn cosine precision similarity algorithms algorithm neo4j gds python project built",say:"The movie recommender suggests films from the shape of the viewing graph. It combines Jaccard node similarity with FastRP embeddings and kNN cosine similarity, and measures quality with precision@K. It uses Neo4j GDS and Python."},
+{id:"p-eval",title:"AI annotation and code evaluation",href:"#p4",keys:"annotation evaluation docker git python tests model responses fellowship golden fail-to-pass project built",say:"The fellowship project is AI annotation and code evaluation. I worked a Docker-based workflow: PR validation, golden-solution development, fail-to-pass test writing and metadata, and review of model responses for justification quality and formatting. Tools include Docker, Git, and Python."},
+{id:"sk-graph",title:"Toolkit",href:"#about",keys:"skills toolkit neo4j cypher gds neodash apoc graph database query tools stack",say:"For graph data science I use Neo4j, Cypher, Neo4j GDS, NeoDash, and APOC."},
+{id:"sk-ml",title:"Toolkit",href:"#about",keys:"skills toolkit python sql r pandas numpy scikit-learn machine learning analysis tools stack",say:"For analysis and machine learning I use Python, SQL, R, pandas, NumPy, and scikit-learn."},
+{id:"sk-viz",title:"Toolkit",href:"#about",keys:"skills toolkit visualization tableau power bi neodash matplotlib dashboard tools stack",say:"For visualization I use Tableau, Power BI, NeoDash, and Matplotlib."},
+{id:"sk-db",title:"Toolkit",href:"#about",keys:"skills toolkit database cloud postgresql mysql mongodb aws google cloud tools stack",say:"For databases and cloud I use PostgreSQL, MySQL, MongoDB, AWS, and Google Cloud."},
+{id:"sk-ai",title:"Toolkit",href:"#about",keys:"skills toolkit applied ai openai api llm agents scispacy tools stack",say:"For applied AI I use the OpenAI API, RAG and GraphRAG, LLM agents, and scispaCy."},
+{id:"sk-prod",title:"Toolkit",href:"#about",keys:"skills toolkit products fastapi nuxt git docker azure sharepoint building software tools stack",say:"For building products I use FastAPI, Nuxt.js, Git, Docker, Azure, and SharePoint."},
+{id:"cert-neo",title:"Certifications",href:"#certifications",keys:"certification certified certificate neo4j graph data science graphacademy march 2026 credential cypher neodash",say:"I am Neo4j Graph Data Science certified through Neo4j GraphAcademy. The credential was issued in March 2026 and covers graph data science, Cypher, and NeoDash."},
+{id:"cert-ai",title:"Certifications",href:"#certifications",keys:"certification certified certificate udemy ai engineer llm rag qlora agents ed donner ligency april 2026 hours",say:"I completed the Udemy AI Engineer Core Track: LLM Engineering, RAG, QLoRA, and Agents, taught by Ed Donner and Ligency (33.5 hours), in April 2026."},
+{id:"contact",title:"Contact",href:"#contact",keys:"contact email linkedin github reach hire message bnkomo gmail bexavi mail",say:"Email me at bnkomo984@gmail.com. LinkedIn is linkedin.com/in/bekithemba-nkomo-da and GitHub is github.com/bexavi."},
+{id:"meta",title:"Ask about me",href:"#ask",keys:"retrieval ask chatbot how this works portfolio question answer grounded bot",say:"This box retrieves passages from the profile on this page and answers only from those passages. If a fact is not here, I will say so."}
+];
+const GROUPS={
+who:{paragraphs:["I am Bekithemba Nkomo, a data analyst in Harare, Zimbabwe. I turn connected data into decisions: supply-chain risk networks, research chatbots grounded in knowledge graphs, and recommenders that learn from relationships. I am looking for data analytics, data product, and product owner roles, in Zimbabwe or remote."],ids:["who","looking"]},
+experience:{paragraphs:["In 2026 I am an AI annotation and evaluation fellow, writing fail-to-pass tests and reviewing model responses. At FHI 360 I was an IT intern on Azure and SharePoint (May 2021–June 2022), then an IT assistant running Active Directory, Exchange, networks, security, and backups for 80+ users across two provinces (July 2022–July 2023), then an Administrative and Finance Clerk (August–December 2023). I started as an ICT intern at the City of Harare (November 2018–August 2019)."],ids:["exp-fellow","exp-fin","exp-it","exp-intern","exp-city"]},
+education:{paragraphs:["My graduate degree is an M.S. in Data Analytics and Visualization at the Katz School of Science and Health, Yeshiva University, New York (2025–26). I hold a postgraduate diploma in Sustainable Project Management, Monitoring and Evaluation from Midlands State University, and a B.Sc. Honours in Computer Science from NUST, Zimbabwe (2020)."],ids:["edu-ms","edu-pg","edu-bsc"]},
+projects:{paragraphs:["Four selected pieces. A Neo4j supply-chain risk graph uses PageRank, Betweenness Centrality, and Louvain. A GraphRAG chatbot for the Devreotes Lab answers from research papers. A movie recommender combines Jaccard, FastRP, and kNN, scored with precision@K. The 2026 fellowship work is AI annotation and code evaluation in Docker."],ids:["p-supply","p-rag","p-movie","p-eval"]},
+skills:{paragraphs:["Graph data science: Neo4j, Cypher, Neo4j GDS, NeoDash, and APOC. Analysis: Python, SQL, R, pandas, NumPy, and scikit-learn. Visualization: Tableau, Power BI, NeoDash, and Matplotlib. Databases and cloud: PostgreSQL, MySQL, MongoDB, AWS, and Google Cloud. Applied AI: the OpenAI API, RAG and GraphRAG, LLM agents, and scispaCy. Building products: FastAPI, Nuxt.js, Git, Docker, Azure, and SharePoint."],ids:["sk-graph","sk-ml","sk-viz","sk-db","sk-ai","sk-prod"]},
+certs:{paragraphs:["I am Neo4j Graph Data Science certified (GraphAcademy, March 2026). I also completed the Udemy AI Engineer Core Track on LLM engineering, RAG, QLoRA, and agents (April 2026, 33.5 hours)."],ids:["cert-neo","cert-ai"]}
+};
+const STOP=new Set("a an the of to and or for in on with about me you your my our is are was were be been being do does did what who whom how when where why which tell please can could would this that it from at as by am i we he his him have has had into".split(" "));
+const SYN={
+school:["education","university","degree"],college:["education","university"],study:["education","university","degree"],studied:["education","university"],degree:["education"],masters:["education","yeshiva"],bachelor:["education","nust"],
+job:["experience","role"],jobs:["experience","roles"],hire:["open","roles","contact"],hiring:["open","roles"],resume:["experience","education"],cv:["experience","education"],
+graph:["neo4j"],graphs:["neo4j"],chatbot:["graphrag"],cert:["certification"],certs:["certification"],certificate:["certification"],certificates:["certification"],
+skill:["toolkit"],skills:["toolkit"],stack:["toolkit"],movie:["recommender"],movies:["recommender"],film:["recommender"],films:["recommender"],
+supply:["chain","risk"],remote:["roles"],available:["open","roles"],reach:["contact","email"],mail:["email","contact"],
+location:["harare","zimbabwe"],live:["harare","zimbabwe"],lives:["harare"],based:["harare","zimbabwe"],
+language:["english","shona","ndebele"],languages:["english","shona","ndebele"],speak:["english","shona","ndebele"]
+};
+function toks(s){return s.toLowerCase().replace(/[^a-z0-9@+#]+/g," ").split(" ").filter(w=>w.length>1&&!STOP.has(w))}
+function qTokens(s){const base=toks(s);const extra=[];base.forEach(t=>{if(SYN[t])extra.push(...SYN[t])});return{base,all:[...new Set(base.concat(extra))]}}
+KB.forEach(c=>{const words=toks(c.title+" "+c.title+" "+c.keys+" "+c.keys+" "+c.say);const tf={};words.forEach(w=>{tf[w]=(tf[w]||0)+1});c.tf=tf;c.dl=words.length||1});
+const df={};KB.forEach(c=>{Object.keys(c.tf).forEach(t=>{df[t]=(df[t]||0)+1})});
+const N=KB.length,avg=KB.reduce((s,c)=>s+c.dl,0)/N,k1=1.2,b=0.75;
+function dedupe(rows){const seen=new Set();return rows.filter(r=>{const k=r.title+"|"+r.href;if(seen.has(k))return false;seen.add(k);return true})}
+function pack(paragraphs,ids){const rows=ids.map(id=>KB.find(k=>k.id===id));return{paragraphs,sources:dedupe(rows.map(r=>({title:r.title,href:r.href}))),passages:rows.map(r=>({title:r.title,text:r.say}))}}
+function miss(){return{paragraphs:["That is not on this page. I can answer about the work, study, experience, certifications, and how to reach me."],sources:[],passages:[]}}
+function bm(q){return KB.map(c=>{let s=0;q.all.forEach(term=>{const tf=c.tf[term]||0;if(!tf)return;const idf=Math.log(1+(N-df[term]+0.5)/(df[term]+0.5));const boost=q.base.includes(term)?1.35:0.7;s+=boost*idf*(tf*(k1+1))/(tf+k1*(1-b+b*c.dl/avg))});return{c,s}}).filter(x=>x.s>0).sort((a,b)=>b.s-a.s)}
+function pick(ranked){if(!ranked.length||ranked[0].s<1.15)return[];let rows=ranked.filter(r=>r.s>=ranked[0].s*0.58).slice(0,3);if(rows.length>1&&rows[0].s>rows[1].s*1.75)rows=[rows[0]];rows=rows.map(r=>r.c);if(rows.length>1&&rows.every(r=>r.id.indexOf("exp-")===0)){const seq=["exp-city","exp-intern","exp-it","exp-fin","exp-fellow"];rows.sort((a,b)=>seq.indexOf(a.id)-seq.indexOf(b.id))}return rows}
+function groupFor(s){
+  const specific=/fhi|nust|yeshiva|katz|midlands|supply|movie|film|recommender|graphrag|chatbot|docker|python|tableau|pagerank|neo4j|cypher|azure|sharepoint|udemy|fellowship|shona|ndebele|english|email|linkedin|github|pandas|fastapi|nuxt|louvain|fastrp|jaccard|scispacy|pymupdf|mongodb|postgres|aws|openai|qlora|betweenness/.test(s);
+  if(specific)return null;
+  if(/\bbackground\b/.test(s))return"arc";
+  if(/\b(who are you|about you|about yourself|introduce yourself|tell me about you)\b/.test(s))return"who";
+  if(/\b(experience|career|resume|cv|employment|worked)\b/.test(s))return"experience";
+  if(/\b(education|study|studied|studies|degree|degrees|university|school|qualifications)\b/.test(s))return"education";
+  if(/\b(projects|portfolio|built|build)\b/.test(s))return"projects";
+  if(/\b(skills|skill|toolkit|stack|tools)\b/.test(s))return"skills";
+  if(/\b(certifications|certification|certificates|certified|credentials)\b/.test(s))return"certs";
+  return null;
+}
+function answerProfile(raw){
+  const s=String(raw||"").toLowerCase().replace(/\s+/g," ").trim();
+  if(!s)return{paragraphs:["Ask about a project, a skill, my study, or how to get in touch."],sources:[],passages:[]};
+  if(/\b(salary|compensation|how old|your age|girlfriend|boyfriend|married|religion|politic)\b/.test(s))return miss();
+  if(/\b(phone|mobile|whatsapp|call me)\b/.test(s))return{paragraphs:["I do not list a phone number. Email is bnkomo984@gmail.com."],sources:[{title:"Contact",href:"#contact"}],passages:[{title:"Contact",text:"Email me at bnkomo984@gmail.com."}]};
+  if(/^(hi|hey|hello|good morning|good afternoon|good evening|yo)[!. ]*$/.test(s))return{paragraphs:["Hello. Ask me about a project, my study, my experience, or how to get in touch."],sources:[],passages:[]};
+  if(/how (does|do) (this|the) (ask|chat|box|rag)|what is this|are you (an? )?(ai|bot|chatgpt)|how do you know/.test(s))return pack([KB.find(k=>k.id==="meta").say],["meta"]);
+  const g=groupFor(s);
+  if(g==="arc")return pack([KB.find(k=>k.id==="arc").say],["arc"]);
+  if(g)return pack(GROUPS[g].paragraphs,GROUPS[g].ids);
+  const q=qTokens(s);
+  if(!q.base.length)return{paragraphs:["Ask about a project, a skill, my study, or how to get in touch."],sources:[],passages:[]};
+  const rows=pick(bm(q));
+  if(!rows.length)return miss();
+  return{paragraphs:rows.map(r=>r.say),sources:dedupe(rows.map(r=>({title:r.title,href:r.href}))),passages:rows.map(r=>({title:r.title,text:r.say}))};
+}
+return answerProfile;
+}
+const answerProfile=createEngine();
+const MOON='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 14.5A8.5 8.5 0 1 1 9.5 3 7 7 0 0 0 21 14.5z"/></svg>';
+const SUN='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>';
+const themeBtn=document.getElementById("theme");
+function themeIsDark(){const set=document.documentElement.dataset.theme;if(set)return set==="dark";return matchMedia("(prefers-color-scheme: dark)").matches}
+function paintTheme(){const dark=themeIsDark();themeBtn.setAttribute("aria-pressed",dark?"true":"false");themeBtn.setAttribute("aria-label",dark?"Switch to light theme":"Switch to dark theme");themeBtn.innerHTML=dark?SUN:MOON}
+themeBtn.addEventListener("click",()=>{document.documentElement.dataset.theme=themeIsDark()?"light":"dark";try{localStorage.setItem("bn-theme",document.documentElement.dataset.theme)}catch(e){}paintTheme()});
+paintTheme();
+const log=document.getElementById("ask-log");
+const form=document.getElementById("ask-form");
+const input=document.getElementById("ask-q");
+const submitBtn=form.querySelector("button");
+function emptyNote(){while(log.firstChild)log.removeChild(log.firstChild);const p=document.createElement("p");p.className="empty";p.textContent="Ask about a project, my study, or whether I am open to work.";log.appendChild(p)}
+function addUser(text){const el=document.createElement("div");el.className="msg user";el.textContent=text;log.appendChild(el)}
+function addBot(hit){const el=document.createElement("div");el.className="msg bot";hit.paragraphs.forEach(t=>{const p=document.createElement("p");p.textContent=t;el.appendChild(p)});if(hit.sources&&hit.sources.length){const s=document.createElement("div");s.className="srcs";const lab=document.createElement("span");lab.textContent="Sources";s.appendChild(lab);hit.sources.forEach(src=>{const a=document.createElement("a");a.href=src.href;a.textContent=src.title;s.appendChild(a)});el.appendChild(s)}log.appendChild(el);log.scrollTop=log.scrollHeight}
+async function reply(raw){const hit=answerProfile(raw);if(ASK_API&&hit.passages&&hit.passages.length){const ctrl=new AbortController();const timer=setTimeout(()=>ctrl.abort(),8000);try{const r=await fetch(ASK_API,{method:"POST",headers:{"Content-Type":"application/json"},signal:ctrl.signal,body:JSON.stringify({question:raw,passages:hit.passages})});const data=await r.json();if(r.ok&&data&&typeof data.answer==="string"&&data.answer.trim())return{paragraphs:[data.answer.trim()],sources:hit.sources,passages:hit.passages}}catch(e){}finally{clearTimeout(timer)}}return hit}
+async function ask(raw){
+  const text=String(raw||"").trim().slice(0,400);
+  if(!text)return;
+  const note=log.querySelector(".empty");if(note)note.remove();
+  addUser(text);
+  input.value="";
+  const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  submitBtn.disabled=true;input.disabled=true;
+  const pending=document.createElement("div");pending.className="msg pending";pending.textContent="Retrieving matching passages…";log.appendChild(pending);log.scrollTop=log.scrollHeight;
+  if(!reduce)await new Promise(r=>setTimeout(r,320));
+  const hit=await reply(text);
+  pending.remove();
+  addBot(hit);
+  submitBtn.disabled=false;input.disabled=false;input.focus();
+}
+form.addEventListener("submit",e=>{e.preventDefault();ask(input.value)});
+document.getElementById("ask-chips").addEventListener("click",e=>{const b=e.target.closest("button");if(b)ask(b.textContent)});
+document.getElementById("ask-clear").addEventListener("click",()=>{emptyNote();input.focus()});
+emptyNote();
+</script>
+</body>
+</html>
